@@ -91,7 +91,7 @@
 
 <template name = "admin">
   <h1>Signed up Customers</h1>
-  <table>
+  <table class="table">
     <tr><th>Customer Email</th><th>Referrer</th><th>Time</th></tr>
     {{#each emails}}
       <tr><td>{{ this.email }}</td><td>{{ this.referrer }}</td><td>{{ this.timestamp }}</td></tr>
