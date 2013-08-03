@@ -4,6 +4,7 @@ EMAIL_REGEX = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@(
 
 // Github account usernames of admin users
 var ADMIN_USERS = ['jacquerie'];
+
 function isAdmin(userId) {
   var user = Meteor.users.findOne({_id: userId});
   try {
@@ -14,25 +15,25 @@ function isAdmin(userId) {
 }
   
 if (Meteor.isClient) {
-
   Meteor.subscribe('userData');
   Meteor.subscribe('emails');
+
   Template.footer.events({
-    'click .login' : function(evt, tmpl){
+    'click .login': function (e, t){
       Meteor.loginWithGithub();
       return false;
     },
 
-    'click .admin' : function(evt, tmpl){
+    'click .admin': function (e, t){
       Session.set("showAdmin", !Session.get("showAdmin"));
     }
-   })
+   });
 
   Template.signup.events({
-    'submit form' : function (evt, tmpl) {
+    'submit form': function (e, t) {
 
-      var email = tmpl.find('input').value
-      , doc = {email: email, referrer: document.referrer, timestamp: new Date()}
+      var email = t.find('input').value
+      , doc = {email: email, referrer: document.referrer, timestamp: new Date()};
 
       if (EMAIL_REGEX.test(email)){
         Session.set("showBadEmail", false);
@@ -53,22 +54,20 @@ if (Meteor.isClient) {
     return Session.get("emailSubmitted");
   };
 
-  Template.footer.isAdmin = function() {
-    return isAdmin(Meteor.userId())
+  Template.footer.isAdmin = function () {
+    return isAdmin(Meteor.userId());
   };
 
-  Template.main.showAdmin = function() {
+  Template.main.showAdmin = function () {
     return Session.get("showAdmin");
   };
 
-  Template.admin.emails = function() {
+  Template.admin.emails = function () {
     return Emails.find().fetch();
   };
-
 }
 
 if (Meteor.isServer) {
-  
   Meteor.publish("userData", function () {
     return Meteor.users.find({_id: this.userId},
       {fields: {'services.github.username': 1, 'username':1}});
@@ -84,5 +83,5 @@ if (Meteor.isServer) {
       insertEmail: function(doc) {
           Emails.insert(doc);
       }
-  })
+  });
 }
