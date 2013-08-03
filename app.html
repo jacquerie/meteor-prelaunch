@@ -1,23 +1,35 @@
 <head>
-  <title>FrozenRidge | Newsletter</title>
-
-  <link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+  <title>Project Name</title>
 </head>
 
 <body>
-  <div class='header'>
-    <img src = "./logo.png" />
+  <div class="container-narrow">
+    <header>
+      {{> header}}
+    </header>
+    <div class="main">
+      {{> main}}
+    </div>
+    <footer>
+      {{> footer}}
+    </footer>
   </div>
-  <div class='content'>
-    {{> main }}
-  </div>
-  <div class='footer'>
-    {{> footer }}
-  </div>
-
 </body>
 
-<template name = "main">
+
+<template name="header">
+  <nav class="pull-right">
+    <ul class="nav nav-pills">
+      <li class="active"><a href="#">Home</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </nav>
+  <h3 class="muted">Project name</h3>
+  <hr>
+</template>
+
+<template name="main">
  {{#if showAdmin}}
     {{> admin}}
  {{else}}
@@ -25,32 +37,57 @@
  {{/if}}
 </template>
 
-<template name = "footer">
-  <a href = "http://frozenridge.co">FrozenRidge | Solving hard problems for business</a>
-  {{#if isAdmin}}
-  | <a href = "#" class = "admin">toggle admin</a>
-  {{/if}}
-  | {{loginButtons}}
+<template name="footer">
+  <hr>
+  <p class="pull-right">
+    {{#if isAdmin}}
+      <a href = "#" class = "admin">toggle admin</a> &middot;
+    {{/if}}
+    {{loginButtons}}
+  </p>
+  <p>&copy; Company 2013 &middot;
+    <a href="#">Privacy</a> &middot;
+    <a href="#">Terms of Service</a>
+  </p>
 </template>
 
 <template name = "signup">
-  {{#if emailSubmitted }}
-    <h1>Thanks for signing up!</h1>
-  {{else }}
-  <h1>Sign up for our newsletter</h1>
-    <p>We'd love to stay in touch with you &mdash; leave us your email and we'll keep you
-    up to date...</p>
-    <form>
-      {{#if showBadEmail}}
-        {{> badEmail}}
-      {{/if}}
-      <input id="email"><button>&gt;</button>
-  {{/if}}
-  </form>
-
-
+  <div class="jumbotron">
+    {{#if emailSubmitted }}
+      <h1>Thanks for signing up!</h1>
+    {{else }}
+      <h1>Super awesome marketing speak!</h1>
+      <p class="lead">
+        Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
+      </p>
+      <form>
+        {{#if showBadEmail}}
+          {{> badEmail}}
+        {{/if}}
+        <input id="email"><button>&gt;</button>
+      </form>
+    {{/if}}
+  </div>
+  <hr>
+  <div class="row-fluid marketing">
+    <div class="span6">
+      <h4>Subheading</h4>
+      <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
+      <h4>Subheading</h4>
+      <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
+      <h4>Subheading</h4>
+      <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
+    </div>
+    <div class="span6">
+      <h4>Subheading</h4>
+      <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
+      <h4>Subheading</h4>
+      <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
+      <h4>Subheading</h4>
+      <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
+    </div>
+  </div>
 </template>
-
 
 <template name = "admin">
   <h1>Signed up Customers</h1>
@@ -62,9 +99,9 @@
   </table>
 </template>
 
-
 <template name="badEmail">
   <div class="error">
     <p>That's not a real email address...</p>
   </div>
 </template>
+
