@@ -66,6 +66,8 @@ if (Meteor.isClient) {
     return Emails.find().fetch();
   };
 
+  // As suggested here: http://stackoverflow.com/q/17874181/374865,
+  // with custom Date formatting.
   Handlebars.registerHelper("prettifyDate", function(timestamp) {
     var monthNames = [
       "Jan", "Feb", "Mar", "Apr", "May", "Jun",
