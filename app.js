@@ -65,6 +65,21 @@ if (Meteor.isClient) {
   Template.admin.emails = function () {
     return Emails.find().fetch();
   };
+
+  Handlebars.registerHelper("prettifyDate", function(timestamp) {
+    var monthNames = [
+      "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+      "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+    ];
+
+    var result = [
+      timestamp.getDate(),
+      monthNames[timestamp.getMonth()],
+      timestamp.getFullYear()
+    ]; 
+
+    return result.join(" ");
+  });
 }
 
 if (Meteor.isServer) {

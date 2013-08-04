@@ -94,11 +94,10 @@
 </template>
 
 <template name = "admin">
-  <h1>Signed up Customers</h1>
   <table class="table table-striped">
     <thead>
       <tr>
-        <th>Customer Email</th>
+        <th>Email</th>
         <th>Referrer</th>
         <th>Time</th>
       </tr>
@@ -106,9 +105,9 @@
     <tbody>
       {{#each emails}}
         <tr>
-          <td>{{ this.email }}</td>
-          <td>{{ this.referrer }}</td>
-          <td>{{ this.timestamp }}</td>
+          <td>{{this.email}}</td>
+          <td>{{this.referrer}}</td>
+          <td>{{prettifyDate this.timestamp}}</td>
         </tr>
       {{/each }}
     </tbody>
