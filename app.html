@@ -1,28 +1,28 @@
-<head>
-  <title>Project Name</title>
-</head>
-
-<body>
-  <div class="container-narrow">
-    <header>
-      {{> header}}
-    </header>
-    <div class="main">
-      {{> main}}
-    </div>
-    <footer>
-      {{> footer}}
-    </footer>
-  </div>
-</body>
-
+<template name="layout">
+   <head>
+        <title>Project Name</title>
+    </head>
+    <body>
+      <div class="container-narrow">
+        <header>
+          {{> yield region='header'}}
+        </header>
+        <div class="main">
+          {{> yield}}
+        </div>
+        <footer>
+          {{> yield region='footer'}}
+        </footer>
+      </div>
+    </body>
+</template>
 
 <template name="header">
   <nav class="pull-right">
     <ul class="nav nav-pills">
-      <li class="active"><a href="#">Home</a></li>
-      <li><a href="#">About</a></li>
-      <li><a href="#">Contact</a></li>
+      <li class="{{ isActiveNow 'main' }}"><a href="{{pathFor 'main'}}">Home</a></li>
+      <li class="{{ isActiveNow 'about' }}"><a href="{{pathFor 'about'}}">About</a></li>
+      <li class="{{ isActiveNow 'contact' }}"><a href="{{pathFor 'contact'}}">Contact</a></li>
     </ul>
   </nav>
   <h3 class="muted">Project name</h3>
@@ -37,13 +37,21 @@
  {{/if}}
 </template>
 
+<template name="about">
+ No content yet on this about page.
+</template>
+
+<template name="contact">
+ No content yet on this contact page.
+</template>
+
 <template name="footer">
   <hr>
   <p class="pull-right">
     {{#if isAdmin}}
       <a href = "#" class = "admin">Toggle Admin</a> &middot;
     {{/if}}
-    {{loginButtons}}
+    {{> loginButtons}}
   </p>
   <p>&copy; Company 2013 &middot;
     <a href="#">Privacy</a> &middot;
@@ -73,8 +81,8 @@
     {{/if}}
   </div>
   <hr>
-  <div class="row-fluid marketing">
-    <div class="span6">
+  <div class="row marketing">
+    <div class="col-md-6">
       <h4>Subheading</h4>
       <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
       <h4>Subheading</h4>
@@ -82,7 +90,7 @@
       <h4>Subheading</h4>
       <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
     </div>
-    <div class="span6">
+    <div class="col-md-6">
       <h4>Subheading</h4>
       <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
       <h4>Subheading</h4>
@@ -93,7 +101,7 @@
   </div>
 </template>
 
-<template name = "admin">
+<template name="admin">
   <table class="table table-striped">
     <thead>
       <tr>
@@ -115,7 +123,7 @@
 </template>
 
 <template name="badEmail">
-  <div class="error">
+  <div class="bg-warning">
     <p>That's not a real email address...</p>
   </div>
 </template>
