@@ -3,7 +3,7 @@ Emails = new Meteor.Collection("emails")
 EMAIL_REGEX = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 // Github account usernames of admin users
-var ADMIN_USERS = ['jacquerie'];
+var ADMIN_USERS = ['github-username'];
 
 function isAdmin(userId) {
   var user = Meteor.users.findOne({_id: userId});
@@ -13,10 +13,53 @@ function isAdmin(userId) {
     return false;
  }
 }
-  
+
+if(Handlebars){
+  Handlebars.registerHelper('isActiveNow', function(routes, className){
+    var currentRoute = Router.current();
+      if (!currentRoute) return '';
+
+    currentRoute = Router.current().route.name.toLowerCase();
+    var reg = new RegExp(routes, 'i');
+
+    if(className.hash)className = 'active';
+
+    return reg.test(currentRoute) ? className : '';
+  });
+}
+
 if (Meteor.isClient) {
   Meteor.subscribe('userData');
   Meteor.subscribe('emails');
+
+  Router.configure({
+      layoutTemplate: 'layout',
+      yieldTemplates: {
+        'header': {to: 'header'},
+        'footer': {to: 'footer'}
+      }
+  });
+
+  Router.map( function () {
+    this.route('main', {
+        path: '/',
+        template: 'main'
+    });
+  });
+
+  Router.map( function () {
+    this.route('about', {
+        path: '/about',
+        template: 'about'
+    });
+  });
+
+  Router.map( function () {
+    this.route('contact', {
+        path: '/contact',
+        template: 'contact'
+    });
+  });
 
   Template.footer.events({
     'click .login': function (e, t){
@@ -78,7 +121,7 @@ if (Meteor.isClient) {
       timestamp.getDate(),
       monthNames[timestamp.getMonth()],
       timestamp.getFullYear()
-    ]; 
+    ];
 
     return result.join(" ");
   });
@@ -95,7 +138,7 @@ if (Meteor.isServer) {
       return Emails.find();
     }
   });
-  
+
   Meteor.methods({
       insertEmail: function(doc) {
           Emails.insert(doc);
