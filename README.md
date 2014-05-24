@@ -5,6 +5,8 @@ project and collect emails of interested customers. It's written in JavaScript
 using the [Meteor](http://www.meteor.com/) framework. This project is a fork
 of [**mongolab-meteor-leadcapture-app**](https://github.com/FrozenRidge/mongolab-meteor-leadcapture-app) by FrozenRidge.
 
+![Preview](/detail.png?raw=true "Preview")
+
 ## Features ##
 
 * Design ~~inspired~~ blatantly stolen from Bootstrap's [Narrow marketing](http://getbootstrap.com/2.3.2/examples/marketing-narrow.html).
@@ -30,4 +32,4 @@ Kicksend's [mailcheck](https://github.com/Kicksend/mailcheck).
 
 * The admin view needs pagination. Currently no official package offers pagination,
 but there's some unofficial support using packages from [Atmosphere](https://atmosphere.meteor.com/).
- 
+
