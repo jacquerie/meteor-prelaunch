@@ -19,8 +19,8 @@ of [**mongolab-meteor-leadcapture-app**](https://github.com/FrozenRidge/mongolab
 2. Clone this project: `$ git clone https://github.com/jacquerie/meteor-prelaunch.git`
 3. Move in the project directory: `cd meteor-prelaunch`
 4. Edit `ADMIN_USERS` (line 6 in `app.js`) so that it contains your Github username(s)
-5. Deploy to meteor.com: `meteor deploy --password APPNAME.meteor.com` where `APPNAME`
-is your app's name, entering a new password when prompted.
+5. Deploy to meteor.com: `meteor deploy APPNAME.meteor.com` where `APPNAME`
+is your app's name.
 6. Click on the Github button in the low left corner and register your new application
 following the popup instructions.
 
